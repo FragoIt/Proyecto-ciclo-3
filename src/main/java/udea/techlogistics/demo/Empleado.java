@@ -4,13 +4,12 @@ public class Empleado {
     private String nombre;
     private String correo;
     private String empresa;
-    private String rolEmpleado;
-
-    public Empleado(String nombre, String correo, String empresa, String rolEmpleado) {
+    private Roles roles;
+    public Empleado(String nombre, String correo, String empresa, Roles roles) {
         this.nombre = nombre;
         this.correo = correo;
         this.empresa = empresa;
-        this.rolEmpleado = rolEmpleado;
+        this.roles = roles;
     }
 
     public String getNombre() {
@@ -37,11 +36,11 @@ public class Empleado {
         this.empresa = empresa;
     }
 
-    public String getRolEmpleado() {
-        return rolEmpleado;
+    public Roles getRoles() {
+        return roles;
     }
 
-    public void setRolEmpleado(String rolEmpleado) {
-        this.rolEmpleado = rolEmpleado;
+    public void setRoles(Roles rolEmpleado) {
+        this.roles = rolEmpleado;
     }
 }

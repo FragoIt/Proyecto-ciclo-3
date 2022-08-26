@@ -10,7 +10,7 @@ public class DemoApplication {
 		//SpringApplication.run(DemoApplication.class, args);
 		Empresa Carulla = new Empresa("Carulla", "calle 116 #25-03", "6013823746", "890900608-9");
 
-		Empleado Daniel = new Empleado("Daniel Rios", "daniel.rios@gmail.com", "Carulla", "Empleado");
+		Empleado Daniel = new Empleado("Daniel Rios", "daniel.rios@gmail.com", "Carulla", Roles.OPERATIVO);
 
 		System.out.println(Carulla.getNombre());
 		Carulla.setDireccion("Av 30 #26-05");
