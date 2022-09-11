@@ -1,65 +1,50 @@
 package udea.techlogistics.demo.entities;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name="employee")
 public class Empleado {
-    private String user;
-    private String password;
-    private String image;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int employee_id;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String email;
+    @Column(nullable = false)
     private String phone;
-    private String enterprise;
-    private Roles role;
-    private List<MovimientoDinero> transactions;
-    private LocalDate createdAt;
-    private LocalDate updatedAt;
+    @Column(nullable = false)
+    private String emp_id;
+    /*@Transient
+    private List<Empleado> employees;*/
+    @Column(nullable = false)
+    private LocalDate createdAt = LocalDate.now();
+    @Column(nullable = false)
+    private LocalDate updatedAt = LocalDate.now();
 
-    public Empleado(String user, String password, String name, String email, String phone, String enterprise, Roles role) {
-        this.setUser(user);
-        this.setPassword(password);
-        this.setName(name);
-        this.setEmail(email);
-        this.setPhone(phone);
-        this.setEnterprise(enterprise);
-        this.setRole(role);
-        this.transactions = new ArrayList<MovimientoDinero>();
-        this.createdAt = LocalDate.now();
-        this.updatedAt = LocalDate.now();
+    public Empleado() {
     }
 
-    public List<MovimientoDinero> getTransactions() {
-        return transactions;
+    public Empleado(int employee_id, String name, String email, String phone, String emp_id, LocalDate createdAt, LocalDate updatedAt) {
+        this.employee_id = employee_id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.emp_id = emp_id;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
-    public void addTransactions(MovimientoDinero transaction){
-        this.transactions.add(transaction);
+    public int getEmployee_id() {
+        return employee_id;
     }
 
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
+    public void setEmployee_id(int employee_id) {
+        this.employee_id = employee_id;
     }
 
     public String getName() {
@@ -86,20 +71,12 @@ public class Empleado {
         this.phone = phone;
     }
 
-    public String getEnterprise() {
-        return enterprise;
+    public String getEmp_id() {
+        return emp_id;
     }
 
-    public void setEnterprise(String enterprise) {
-        this.enterprise = enterprise;
-    }
-
-    public Roles getRole() {
-        return role;
-    }
-
-    public void setRole(Roles role) {
-        this.role = role;
+    public void setEmp_id(String emp_id) {
+        this.emp_id = emp_id;
     }
 
     public LocalDate getCreatedAt() {
@@ -116,22 +93,5 @@ public class Empleado {
 
     public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    @Override
-    public String toString() {
-        return "Empleado{" +
-                "user='" + user + '\'' +
-                ", password='" + password + '\'' +
-                ", image='" + image + '\'' +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", enterprise='" + enterprise + '\'' +
-                ", role=" + role +
-                ", transactions=" + transactions +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
     }
 }
