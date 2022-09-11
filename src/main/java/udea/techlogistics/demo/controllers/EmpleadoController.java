@@ -23,11 +23,11 @@ public class EmpleadoController {
     public Empleado createEmployee(@RequestBody Empleado empleado){
         return this.service.createEmpleado(empleado);
     }
-    @GetMapping("/{enterprise_id}")
+    @GetMapping("/{employee_id}")
     public Empleado findById(@PathVariable int employee_id ){
         return service.findById( employee_id );
     }
-    @PutMapping("/{enterprise_id}")
+    @PutMapping("/{employee_id}")
     public Empleado updateEmployee(@RequestBody Empleado empleado ){
         if ( service.findById(empleado.getEmployee_id()) != null ){
             return service.updateEmployee( empleado );
