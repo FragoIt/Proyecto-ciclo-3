@@ -1,21 +1,36 @@
 package udea.techlogistics.demo.services;
 
-import udea.techlogistics.demo.entities.Empleado;
+import org.springframework.stereotype.Service;
 import udea.techlogistics.demo.entities.Empresa;
-import udea.techlogistics.demo.entities.Roles;
+import udea.techlogistics.demo.repositories.EmpresaRepository;
+import java.util.List;
+import java.util.Optional;
 
+@Service
 public class EmpresaService {
 
-    Empresa Carulla;
-    Empleado Daniel;
-
-    public EmpresaService(){
-        this.Carulla = new Empresa("Carulla", "Calle 117 #26#03", "60143543543", "45-424234");
-        this.Daniel = new Empleado("fdaniel", "abc", "Felipe Daniel M", "danie@gmail.com", "32454543", "Carulla", Roles.ADMINISTADOR);
-        Carulla.addEmployees(Daniel);
+    private EmpresaRepository repository;
+    public EmpresaService(EmpresaRepository repository){
+        this.repository = repository;
     }
 
-    public Empresa getEnterprise(){
-        return this.Carulla;
+    public List<Empresa> getEnterprise(){
+        return this.repository.findAll();
+    }
+    public Empresa createEnterprise(Empresa newEmpresa){
+        return this.repository.save(newEmpresa);
+    }
+    public Empresa findById(int enterprise_id ){
+        Optional<Empresa> optDish = repository.findById( enterprise_id );
+        if( optDish.isPresent()){
+            return optDish.get();
+        }
+        return null;
+    }
+    public Empresa updateEnterprise( Empresa enterprise ){
+        return repository.save( enterprise );
+    }
+    public void deleteEnterprise( Empresa enterprise ){
+        repository.delete( enterprise );
     }
 }

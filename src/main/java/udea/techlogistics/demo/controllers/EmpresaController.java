@@ -1,20 +1,46 @@
 package udea.techlogistics.demo.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import udea.techlogistics.demo.entities.Empresa;
 import udea.techlogistics.demo.services.EmpresaService;
 
-@RestController
-public class EmpresaController {
-    EmpresaService service;
+import java.util.List;
 
-    public EmpresaController() {
-        this.service = new EmpresaService();
+@RestController
+@RequestMapping("/enterprise")
+public class EmpresaController {
+    private EmpresaService service;
+
+    public EmpresaController(EmpresaService service) {
+        this.service = service;
     }
 
-    @GetMapping("/enterprise")
-    public Empresa Enterprise(){
+    @GetMapping
+    public List<Empresa> Enterprise(){
         return this.service.getEnterprise();
+    }
+    @PostMapping
+    public Empresa createEnterprise(@RequestBody Empresa empresa){
+        return this.service.createEnterprise(empresa);
+    }
+    @GetMapping("/{enterprise_id}")
+    public Empresa findById(@PathVariable int enterprise_id ){
+        return service.findById( enterprise_id );
+    }
+    @PutMapping("/{enterprise_id}")
+    public Empresa updateEnterprise(@RequestBody Empresa empresa ){
+        if ( service.findById( empresa.getEnterprise_id() ) != null ){
+            return service.updateEnterprise( empresa );
+        }
+        return null;
+    }
+    @DeleteMapping("/{enterprise_id}")
+    public Empresa deleteEnterprise( @PathVariable int enterprise_id ){
+        Empresa enterprise = service.findById( enterprise_id );
+        if( enterprise != null){
+            service.deleteEnterprise( enterprise );
+            return enterprise;
+        }
+        return null;
     }
 }
