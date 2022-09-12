@@ -19,8 +19,8 @@ public class Empresa {
     private String phone;
     @Column(nullable = false)
     private String nit;
-    @Transient
-    private List<Empleado> employees;
+//    @Transient
+//    private List<Empleado> employees;
     @Column(nullable = false)
     private LocalDate createdAt = LocalDate.now();
     @Column(nullable = false)
@@ -34,7 +34,7 @@ public class Empresa {
         this.setAddress(address);
         this.setPhone(phone);
         this.setNit(nit);
-        this.employees = new ArrayList<Empleado>();
+        //this.employees = new ArrayList<Empleado>();
         this.setCreatedAt(createdAt);
         this.setUpdatedAt(updatedAt);
     }
@@ -47,13 +47,13 @@ public class Empresa {
         this.enterprise_id = enterprise_id;
     }
 
-    public List<Empleado> getEmployees() {
-        return employees;
-    }
-
-    public void addEmployees(Empleado employee){
-        this.employees.add(employee);
-    }
+//    public List<Empleado> getEmployees() {
+//        return employees;
+//    }
+//
+//    public void addEmployees(Empleado employee){
+//        this.employees.add(employee);
+//    }
 
     public String getName() {
         return name;

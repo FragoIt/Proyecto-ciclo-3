@@ -4,19 +4,19 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-//@Entity
-//@Table(name ="movements")
+@Entity
+@Table(name ="movements")
 public class MovimientoDinero {
-   //@Id
-   //@GeneratedValue(strategy= GenerationType.IDENTITY)
+   @Id
+   @GeneratedValue(strategy= GenerationType.IDENTITY)
    private Long id;
    private float amount;
    private String concept;
    private LocalDateTime createdAt;
    private LocalDate updatedAt;
 
-    //@ManyToOne
-    //@JoinColumn(name = "empleado_id")
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
     private Empleado usuario;
 
     public MovimientoDinero() {

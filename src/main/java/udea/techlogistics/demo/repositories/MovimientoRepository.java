@@ -7,11 +7,11 @@ import udea.techlogistics.demo.entities.MovimientoDinero;
 
 import java.util.ArrayList;
 
-/*@Repository
+@Repository
 public interface MovimientoRepository extends JpaRepository<MovimientoDinero, Long> {
     @Query(value ="select * from movimientos where empleado_id= ?1", nativeQuery = true)
     public abstract ArrayList<MovimientoDinero> findByEmpleado(Integer id);
 
     @Query(value="select * from movimientos where empleado_id in (select id from empleado where empresa_id= ?1)", nativeQuery = true)
     public abstract ArrayList<MovimientoDinero> findByEmpresa(Integer id);
-}*/
+}

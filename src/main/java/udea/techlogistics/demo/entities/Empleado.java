@@ -10,13 +10,17 @@ import java.util.List;
 public class Empleado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int employee_id;
+    private Integer employee_id;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
     private String email;
     @Column(nullable = false)
     private String phone;
+
+//    @ManyToOne
+//    @JoinColumn(name="enterprise_id")
+//    private Empresa empresa;
     @Column(nullable = false)
     private String emp_id;
     /*@Transient
@@ -37,6 +41,7 @@ public class Empleado {
         this.emp_id = emp_id;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        //this.empresa= empresa;
     }
 
     public int getEmployee_id() {

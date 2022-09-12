@@ -6,11 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import udea.techlogistics.demo.entities.MovimientoDinero;
+import udea.techlogistics.demo.services.MovimientoServices;
 
 
 import java.util.ArrayList;
 import java.util.List;
-/*@RestController
+@RestController
 public class MovimientoController {
 
     @Autowired
@@ -59,4 +60,4 @@ public class MovimientoController {
     public ArrayList<MovimientoDinero> movimientosPorEmpresa(@PathVariable("id") Integer id){
         return movimientosService.obtenerPorEmpresa(id);
     }
-}*/
+}

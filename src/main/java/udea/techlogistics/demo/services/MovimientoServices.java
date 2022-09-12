@@ -4,19 +4,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import udea.techlogistics.demo.entities.MovimientoDinero;
 
+import udea.techlogistics.demo.repositories.MovimientoRepository;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-/*@Service
+@Service
 public class MovimientoServices {
-    /*@Autowired
+    @Autowired
     MovimientoRepository MovimientoRepository;
 
+
+    public MovimientoServices(MovimientoRepository MovimientoRepository){
+        this.MovimientoRepository = MovimientoRepository;
+    }
     public List<MovimientoDinero> getAllMovimientos(){ //Metodo que me muestra todos los movimientos sin ningn filtro
-        List<MovimientoDinero> movimientosList = new ArrayList<>();
-        MovimientoRepository.findAll().forEach(movimiento -> movimientosList.add(movimiento));  //Recorremos el iterable que regresa el metodo findAll del Jpa y lo guardamos en la lista creada
-        return movimientosList;
+//        List<MovimientoDinero> movimientosList = new ArrayList<>();
+//        MovimientoRepository.findAll().forEach(movimiento -> movimientosList.add(movimiento));  //Recorremos el iterable que regresa el metodo findAll del Jpa y lo guardamos en la lista creada
+        return MovimientoRepository.findAll();
     }
 
     public MovimientoDinero getMovimientoById(Long id){ //Ver movimientos por id
@@ -28,9 +34,9 @@ public class MovimientoServices {
         return mov;
     }
 
-    public boolean deleteMovimiento(Long id){ //Eliminar movimiento por id
-        MovimientoRepository.deleteById(id); //Eliminar usando el metodo que nos ofrece el repositorio
-        if(this.MovimientoRepository.findById(id).isPresent()){ //Si al buscar el movimiento lo encontramos, no se eliminó (false)
+    public boolean deleteMovimiento(Long id){
+        MovimientoRepository.deleteById(id);
+        if(this.MovimientoRepository.findById(id).isPresent()){
             return false;
         }
 
@@ -44,4 +50,4 @@ public class MovimientoServices {
     public ArrayList<MovimientoDinero> obtenerPorEmpresa(Integer id) { //Obtener movimientos teniendo en cuenta el id de la empresa a la que pertencen los empleados que la registraron
         return MovimientoRepository.findByEmpresa(id);
     }
-}*/
+}
