@@ -33,24 +33,33 @@ public class Empleado {
     public Empleado() {
     }
 
-    public Empleado(int employee_id, String name, String email, String phone, String emp_id, LocalDate createdAt, LocalDate updatedAt) {
-        this.employee_id = employee_id;
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.emp_id = emp_id;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+    public Empleado(String name, String email, String phone, String emp_id,LocalDate createdAt, LocalDate updatedAt ) {
+
+        this.setName(name);
+        this.setEmail(email);
+        this.setPhone(phone);
+        this.setEmp_id (emp_id);
         //this.empresa= empresa;
+        this.setCreatedAt(createdAt);
+        this.setUpdatedAt (updatedAt);
     }
 
-    public int getEmployee_id() {
+    public void setEmployee_id(Integer employee_id) {
+        this.employee_id = employee_id;
+    }
+
+//    public Empresa getEmpresa() {
+//        return empresa;
+//    }
+//
+//    public void setEmpresa(Empresa empresa) {
+//        this.empresa = empresa;
+//    }
+
+    public Integer getEmployee_id() {
         return employee_id;
     }
 
-    public void setEmployee_id(int employee_id) {
-        this.employee_id = employee_id;
-    }
 
     public String getName() {
         return name;
