@@ -6,7 +6,6 @@ import udea.techlogistics.demo.entities.MovimientoDinero;
 
 import udea.techlogistics.demo.repositories.MovimientoRepository;
 
-
 import java.util.ArrayList;
 import java.util.List;
 

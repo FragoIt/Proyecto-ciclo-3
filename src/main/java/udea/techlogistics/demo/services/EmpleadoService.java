@@ -3,8 +3,11 @@ package udea.techlogistics.demo.services;
 import org.springframework.stereotype.Service;
 import udea.techlogistics.demo.entities.Empleado;
 import udea.techlogistics.demo.repositories.EmpleadoRepository;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EmpleadoService {
@@ -32,6 +35,10 @@ public class EmpleadoService {
     }
     public void deleteEmployee( Empleado employee ){
         repository.delete( employee );
+    }
+
+    public List<Empleado> getEmployeeEnterprise(int id){
+        return repository.getEmployeeEnterprise( id );
     }
 }
 

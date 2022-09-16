@@ -51,12 +51,12 @@ public class MovimientoController {
 
     }
 
-    @GetMapping("/empleados/{id}/movimientos") //Consultar movimientos por id del empleado
+    @GetMapping("/employee/{id}/movimientos") //Consultar movimientos por id del empleado
     public ArrayList<MovimientoDinero> movimientosPorEmpleado(@PathVariable("id") Integer id){
         return movimientosService.obtenerPorEmpleado(id);
     }
 
-    @GetMapping("/enterprises/{id}/movimientos") //Consultar movimientos que pertenecen a una empresa por el id de la empresa
+    @GetMapping("/enterprise/{id}/movimientos") //Consultar movimientos que pertenecen a una empresa por el id de la empresa
     public ArrayList<MovimientoDinero> movimientosPorEmpresa(@PathVariable("id") Integer id){
         return movimientosService.obtenerPorEmpresa(id);
     }

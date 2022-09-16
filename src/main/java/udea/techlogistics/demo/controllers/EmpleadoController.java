@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/empleado")
+@RequestMapping("/employee")
 public class EmpleadoController {
     private EmpleadoService service;
 
@@ -20,6 +20,12 @@ public class EmpleadoController {
     public List<Empleado> Employee(){
         return this.service.getEmployee();
     }
+
+    @GetMapping("enterprise/{employee_id}")
+    public List<Empleado> getEmployeeEnterprise(@PathVariable int employee_id ){
+        return service.getEmployeeEnterprise( employee_id );
+    }
+
     @PostMapping
     public Empleado createEmployee(@RequestBody Empleado empleado){
         return this.service.createEmpleado(empleado);

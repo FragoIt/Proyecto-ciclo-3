@@ -1,19 +1,22 @@
 package udea.techlogistics.demo.entities;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name ="movements")
 public class MovimientoDinero {
-   @Id
-   @GeneratedValue(strategy= GenerationType.IDENTITY)
-   private Long id;
-   private float amount;
-   private String concept;
-   private LocalDateTime createdAt;
-   private LocalDate updatedAt;
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
+    @Column(nullable = false)
+    private float amount;
+    @Column(nullable = false)
+    private String concept;
+    @Column(nullable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
+    @Column(nullable = false)
+    private LocalDateTime updatedAt = LocalDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
@@ -22,17 +25,13 @@ public class MovimientoDinero {
     public MovimientoDinero() {
     }
 
-
-    public MovimientoDinero(Long id, float amount, String concept, LocalDateTime createdAt, LocalDate updatedAt, Empleado usuario) {
-        this.id = id;
+    public MovimientoDinero(float amount, String concept, Empleado usuario) {
         this.amount = amount;
         this.concept = concept;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.setCreatedAt(createdAt);
+        this.setUpdatedAt(updatedAt);
         this.usuario = usuario;
     }
-
-
 
     public Long getId() {
         return id;
@@ -71,19 +70,15 @@ public class MovimientoDinero {
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+        this.createdAt = LocalDateTime.now();
     }
 
-    public LocalDate getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDate updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-    //@PrePersist
-    public void asignarFechaRegistro() {
-        createdAt = LocalDateTime.now();
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = LocalDateTime.now();
     }
 
     @Override

@@ -1,6 +1,16 @@
 package udea.techlogistics.demo.entities;
 
 public enum Roles {
-    ADMINISTADOR,OPERATIVO
-    
+    ADMINISTRADOR ("Administrador"),
+    OPERATIVO ("Operativo");
+
+    private final String name;
+
+    Roles(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

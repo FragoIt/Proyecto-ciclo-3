@@ -2,29 +2,35 @@ package udea.techlogistics.demo.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name="employee")
 public class Empleado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer employee_id;
+    private int employee_id;
+    @Column(nullable = false)
+    private String users;
+    @Column(nullable = false)
+    private String password;
+
+    private String image;
     @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
+    private String document;
     @Column(nullable = false)
     private String email;
     @Column(nullable = false)
     private String phone;
 
-//    @ManyToOne
-//    @JoinColumn(name="enterprise_id")
-//    private Empresa empresa;
     @Column(nullable = false)
-    private String emp_id;
-    /*@Transient
-    private List<Empleado> employees;*/
+    private Roles role;
+
+    @ManyToOne
+    @JoinColumn(name="enterprise_id")
+    private Empresa enterprise;
+
     @Column(nullable = false)
     private LocalDate createdAt = LocalDate.now();
     @Column(nullable = false)
@@ -33,15 +39,17 @@ public class Empleado {
     public Empleado() {
     }
 
-    public Empleado(int employee_id, String name, String email, String phone, String emp_id, LocalDate createdAt, LocalDate updatedAt) {
-        this.employee_id = employee_id;
+    public Empleado(String users, String password, String name, String document, String email, String phone, Roles role, Empresa enterprise) {
+        this.users = users;
+        this.password = password;
         this.name = name;
+        this.document = document;
         this.email = email;
         this.phone = phone;
-        this.emp_id = emp_id;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        //this.empresa= empresa;
+        this.role = role;
+        this.enterprise = enterprise;
+        this.setCreatedAt(createdAt);
+        this.setUpdatedAt(updatedAt);
     }
 
     public int getEmployee_id() {
@@ -52,6 +60,18 @@ public class Empleado {
         this.employee_id = employee_id;
     }
 
+    public String getUsers() { return users;}
+
+    public void setUsers(String users) { this.users = users;}
+
+    public String getPassword() { return password;}
+
+    public void setPassword(String password) { this.password = password; }
+
+    public String getImage() { return image; }
+
+    public void setImage(String image) { this.image = image; }
+
     public String getName() {
         return name;
     }
@@ -59,6 +79,10 @@ public class Empleado {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getDocument() { return document; }
+
+    public void setDocument(String document) { this.document = document; }
 
     public String getEmail() {
         return email;
@@ -76,12 +100,16 @@ public class Empleado {
         this.phone = phone;
     }
 
-    public String getEmp_id() {
-        return emp_id;
+    public Roles getRole() { return role; }
+
+    public void setRole(Roles role) { this.role = role; }
+
+    public Empresa getEnterprise() {
+        return enterprise;
     }
 
-    public void setEmp_id(String emp_id) {
-        this.emp_id = emp_id;
+    public void setEnterprise(Empresa enterprise) {
+        this.enterprise = enterprise;
     }
 
     public LocalDate getCreatedAt() {
@@ -89,7 +117,7 @@ public class Empleado {
     }
 
     public void setCreatedAt(LocalDate createdAt) {
-        this.createdAt = createdAt;
+        this.createdAt = LocalDate.now();
     }
 
     public LocalDate getUpdatedAt() {
@@ -97,6 +125,7 @@ public class Empleado {
     }
 
     public void setUpdatedAt(LocalDate updatedAt) {
-        this.updatedAt = updatedAt;
+        this.updatedAt = LocalDate.now();
     }
+
 }
