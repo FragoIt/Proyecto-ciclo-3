@@ -38,7 +38,6 @@ public class Empleado {
 
     public Empleado() {
     }
-
     public Empleado(String users, String password, String name, String document, String email, String phone, Roles role, Empresa enterprise) {
         this.users = users;
         this.password = password;
