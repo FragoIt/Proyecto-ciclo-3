@@ -79,7 +79,7 @@ public class Empresa {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {this.createdAt = LocalDate.now();}
+    public void setCreatedAt(LocalDate createdAt) {this.createdAt = createdAt;}
 
     public LocalDate getUpdatedAt() {
         return updatedAt;
