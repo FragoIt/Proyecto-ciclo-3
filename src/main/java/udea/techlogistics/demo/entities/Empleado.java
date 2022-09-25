@@ -24,7 +24,10 @@ public class Empleado {
     @Column(nullable = false)
     private String phone;
 
-    @Column(nullable = false)
+
+    //hotfix de enum
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role",nullable = false)
     private Roles role;
 
     @ManyToOne
