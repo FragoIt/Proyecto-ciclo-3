@@ -8,6 +8,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import udea.techlogistics.demo.entities.Empleado;
 import udea.techlogistics.demo.entities.Empresa;
 import udea.techlogistics.demo.entities.MovimientoDinero;
+import udea.techlogistics.demo.entities.Roles;
 import udea.techlogistics.demo.services.EmpleadoService;
 import udea.techlogistics.demo.services.EmpresaService;
 import udea.techlogistics.demo.services.MovimientoServices;
@@ -73,6 +74,18 @@ public class FrontInitialController {
         List<Empleado> employee = this.serviceEmployee.getEmployee();
         model.addAttribute("employee",employee);
         return "employees";
+    }
+    @GetMapping("/employeeNew")
+    public String newEployee(Model model){
+        model.addAttribute("employee", new Empleado());
+        model.addAttribute("Roles", Roles.values());
+        return "employeesCreate";
+    }
+    @PostMapping("/employeeAdd")
+    public RedirectView createEmployee(@ModelAttribute Empleado empleado, Model model){
+        model.addAttribute(empleado);
+        this.serviceEmployee.createEmpleado(empleado);
+        return new RedirectView("/usersEmployee");
     }
 
     //Movimiento
