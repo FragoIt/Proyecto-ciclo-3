@@ -3,7 +3,6 @@ package udea.techlogistics.demo.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import udea.techlogistics.demo.entities.MovimientoDinero;
 import udea.techlogistics.demo.services.MovimientoServices;
@@ -19,7 +18,7 @@ public class MovimientoController {
 
     @GetMapping("/movimientos")
     public List<MovimientoDinero> verMovimientos(){
-        return movimientosService.getAllMovimientos();
+        return movimientosService.getAllMovements();
     }
 
     @PostMapping("/movimientos")
@@ -53,11 +52,11 @@ public class MovimientoController {
 
     @GetMapping("/employee/{id}/movimientos") //Consultar movimientos por id del empleado
     public ArrayList<MovimientoDinero> movimientosPorEmpleado(@PathVariable("id") Integer id){
-        return movimientosService.obtenerPorEmpleado(id);
+        return movimientosService.getXEmplooye(id);
     }
 
     @GetMapping("/enterprise/{id}/movimientos") //Consultar movimientos que pertenecen a una empresa por el id de la empresa
     public ArrayList<MovimientoDinero> movimientosPorEmpresa(@PathVariable("id") Integer id){
-        return movimientosService.obtenerPorEmpresa(id);
+        return movimientosService.getXEnterprise(id);
     }
 }

@@ -2,7 +2,6 @@ package udea.techlogistics.demo.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-
 @Entity
 @Table(name="employee")
 public class Empleado {
@@ -45,7 +44,7 @@ public class Empleado {
         this.document = document;
         this.email = email;
         this.phone = phone;
-        this.role = role;
+        this.role= role;
         this.enterprise = enterprise;
         this.setCreatedAt(createdAt);
         this.setUpdatedAt(updatedAt);

@@ -1,7 +1,10 @@
 package udea.techlogistics.demo.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import udea.techlogistics.demo.entities.MovimientoDinero;
 
 import udea.techlogistics.demo.repositories.MovimientoRepository;
@@ -15,12 +18,14 @@ public class MovimientoServices {
     MovimientoRepository MovimientoRepository;
 
 
+    public Page<MovimientoDinero> findAll(Pageable pageable){
+        return MovimientoRepository.findAll(pageable);
+    }
+
     public MovimientoServices(MovimientoRepository MovimientoRepository){
         this.MovimientoRepository = MovimientoRepository;
     }
-    public List<MovimientoDinero> getAllMovimientos(){ //Metodo que me muestra todos los movimientos sin ningn filtro
-//        List<MovimientoDinero> movimientosList = new ArrayList<>();
-//        MovimientoRepository.findAll().forEach(movimiento -> movimientosList.add(movimiento));  //Recorremos el iterable que regresa el metodo findAll del Jpa y lo guardamos en la lista creada
+    public List<MovimientoDinero> getAllMovements(){
         return this.MovimientoRepository.findAll();
     }
     public List<MovimientoDinero> getMovements(){
@@ -31,7 +36,7 @@ public class MovimientoServices {
         return MovimientoRepository.findById(id).get();
     }
 
-    public MovimientoDinero saveOrUpdateMovimiento(MovimientoDinero movimientoDinero){ //Guardar o actualizar elementos
+    public MovimientoDinero saveOrUpdateMovimiento(MovimientoDinero movimientoDinero){
         MovimientoDinero mov=MovimientoRepository.save(movimientoDinero);
         return mov;
     }
@@ -42,14 +47,32 @@ public class MovimientoServices {
             return false;
         }
 
-        return true; //Si al buscar el movimiento no lo encontramos, si lo eliminò (true)
+        return true;
     }
 
-    public ArrayList<MovimientoDinero> obtenerPorEmpleado(Integer id) { //Obterner teniendo en cuenta el id del empleado
-        return MovimientoRepository.findByEmpleado(id);
+    public ArrayList<MovimientoDinero> getXEmplooye(Integer id) {
+        return MovimientoRepository.findByEmplooye(id);
     }
 
-    public ArrayList<MovimientoDinero> obtenerPorEmpresa(Integer id) { //Obtener movimientos teniendo en cuenta el id de la empresa a la que pertencen los empleados que la registraron
+    public ArrayList<MovimientoDinero> getXEnterprise(Integer id) {
         return MovimientoRepository.findByEmpresa(id);
     }
+
+
+    public Long sumMounts(){
+        return MovimientoRepository.SumarMonto();
+    }
+
+
+    public Long mountsXEmplooye(Integer id){
+        return MovimientoRepository.mountXEmplooyes(id);
+    }
+
+
+    public Long mountsXEnterprise(Integer id){
+        return MovimientoRepository.mountXEnterprise(id);
+    }
+
+
+
 }
