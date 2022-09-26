@@ -132,7 +132,7 @@
                             <td th:text="${employe.role}"></td>
                             <td th:text="${employe.enterprise.name}"></td>
                             <td>
-                                <a class="btn btn-primary">
+                                <a class="btn btn-primary" th:href="@{/employerUpdate/{employee_id}(employee_id=${employe.employee_id})}">
                                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#edit"/></svg>
                                     Editar
                                 </a>

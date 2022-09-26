@@ -87,6 +87,20 @@ public class FrontInitialController {
         this.serviceEmployee.createEmpleado(empleado);
         return new RedirectView("/usersEmployee");
     }
+    @GetMapping("/employerUpdate/{employee_id}")
+    public String findByIdEmployee(@PathVariable int employee_id, Model model ) {
+        model.addAttribute("employee", serviceEmployee.findById(employee_id));
+        model.addAttribute("Roles", Roles.values());
+        return "/employeesUpdate";
+    }
+    @PutMapping("/employerUpdate/{employee_id}")
+    public RedirectView updateEmployee(@PathVariable int employee_id, @ModelAttribute("empleado") Empleado empleado, Model model ){
+        if ( serviceEmployee.findById( employee_id ) != null ){
+            serviceEmployee.updateEmployee(empleado);
+        }
+        return new RedirectView("/usersEmployee");
+    }
+
 
     //Movimiento
     @GetMapping("/Movements")
