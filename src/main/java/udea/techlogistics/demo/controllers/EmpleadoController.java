@@ -44,7 +44,7 @@ public class EmpleadoController {
     public Empleado deleteEmployee( @PathVariable int employee_id ){
         Empleado employee = service.findById( employee_id );
         if( employee != null){
-            service.deleteEmployee( employee );
+            service.deleteEmployee(employee);
             return employee;
         }
         return null;
