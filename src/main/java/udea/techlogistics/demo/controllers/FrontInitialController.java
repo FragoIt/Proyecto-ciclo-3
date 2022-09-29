@@ -107,6 +107,13 @@ public class FrontInitialController {
         return new RedirectView("/usersEmployee");
     }
 
+    @GetMapping("/employerDelete/{employee_id}")
+    public RedirectView deleteEmployee( @PathVariable int employee_id ){
+        Empleado employee = serviceEmployee.findById( employee_id );
+        serviceEmployee.deleteEmployee(employee);
+        return new RedirectView("/usersEmployee");
+    }
+
 
 
     @GetMapping("/movementsView")
