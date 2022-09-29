@@ -23,7 +23,11 @@ public class Empleado {
     @Column(nullable = false)
     private String phone;
 
-    @Column(nullable = false)
+
+
+    //hotfix de enum
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role",nullable = false)
     private Roles role;
 
     @ManyToOne
@@ -37,7 +41,7 @@ public class Empleado {
 
     public Empleado() {
     }
-    public Empleado(String users, String password, String name, String document, String email, String phone, Roles role, Empresa enterprise) {
+    public Empleado(String users, String password, String name, String document, String email, String phone, Roles role, Empresa enterprise, String image) {
         this.users = users;
         this.password = password;
         this.name = name;
@@ -48,6 +52,7 @@ public class Empleado {
         this.enterprise = enterprise;
         this.setCreatedAt(createdAt);
         this.setUpdatedAt(updatedAt);
+        this.image= image;
     }
 
     public int getEmployee_id() {

@@ -17,20 +17,21 @@ public class MovimientoServices {
     @Autowired
     MovimientoRepository MovimientoRepository;
 
-
-    public Page<MovimientoDinero> findAll(Pageable pageable){
-        return MovimientoRepository.findAll(pageable);
-    }
+//
+//    //public Page<MovimientoDinero> findAll(Pageable pageable){
+//        return MovimientoRepository.findAll(pageable);
+//    }
 
     public MovimientoServices(MovimientoRepository MovimientoRepository){
         this.MovimientoRepository = MovimientoRepository;
     }
+
     public List<MovimientoDinero> getAllMovements(){
         return this.MovimientoRepository.findAll();
     }
-    public List<MovimientoDinero> getMovements(){
-        return this.MovimientoRepository.findAll();
-    }
+//    public List<MovimientoDinero> getMovements(){
+//        return this.MovimientoRepository.findAll();
+//    }
 
     public MovimientoDinero getMovimientoById(Long id){ //Ver movimientos por id
         return MovimientoRepository.findById(id).get();
@@ -44,10 +45,10 @@ public class MovimientoServices {
     public boolean deleteMovimiento(Long id){
         MovimientoRepository.deleteById(id);
         if(this.MovimientoRepository.findById(id).isPresent()){
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     public ArrayList<MovimientoDinero> getXEmplooye(Integer id) {
@@ -71,6 +72,10 @@ public class MovimientoServices {
 
     public Long mountsXEnterprise(Integer id){
         return MovimientoRepository.mountXEnterprise(id);
+    }
+
+    public int IdPorCorreo(String email){
+        return MovimientoRepository.idXEmail(email);
     }
 
 

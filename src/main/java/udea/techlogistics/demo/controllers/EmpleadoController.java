@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.*;
 import udea.techlogistics.demo.entities.Empleado;
 import udea.techlogistics.demo.services.EmpleadoService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

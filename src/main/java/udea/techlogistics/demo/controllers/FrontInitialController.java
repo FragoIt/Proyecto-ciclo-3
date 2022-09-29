@@ -1,27 +1,20 @@
 package udea.techlogistics.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import udea.techlogistics.demo.entities.Empleado;
 import udea.techlogistics.demo.entities.Empresa;
 import udea.techlogistics.demo.entities.MovimientoDinero;
-import udea.techlogistics.demo.pagination.PageRender;
-import udea.techlogistics.demo.repositories.MovimientoRepository;
+import udea.techlogistics.demo.entities.Roles;
 import udea.techlogistics.demo.services.EmpleadoService;
 import udea.techlogistics.demo.services.EmpresaService;
 import udea.techlogistics.demo.services.MovimientoServices;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -83,108 +76,129 @@ public class FrontInitialController {
         model.addAttribute("employee",employee);
         return "employees";
     }
-//    @GetMapping({"/","/listar",""})
-//    public String listarEmpleados(@RequestParam(name = "page",defaultValue = "0") int page,Model modelo) {
-//        Pageable pageRequest = PageRequest.of(page, 4);
-//        Page<Empleado> empleados = empleadoService.findAll(pageRequest);
-//        PageRender<Empleado> pageRender = new PageRender<>("/listar", empleados);
-//
-//        modelo.addAttribute("titulo","Listado de empleados");
-//        modelo.addAttribute("empleados",empleados);
-//        modelo.addAttribute("page", pageRender);
-//
-//        return "listar";
-//    }
-//    @GetMapping ("/movementsView")
-//    public String movementsView(Model model){
-////        Pageable pageRequest = PageRequest.of(page, 4);
-////        Page<MovimientoDinero> paginaMovimientos= serviceMovement.findAll(pageRequest);
-////        PageRender<MovimientoDinero> pageRender = new PageRender<>("/movementsView", paginaMovimientos);
-////        model.addAttribute("movlist",paginaMovimientos.getContent());
-////        model.addAttribute("paginas",new int[paginaMovimientos.getTotalPages()]);
-////        model.addAttribute("paginaActual", NumeroPagina);
-////        model.addAttribute("mensaje",mensaje);
-//        //model.addAttribute("titulo","Listado de movimientos");
-////        model.addAttribute("movimientos",paginaMovimientos);
-////        model.addAttribute("page", pageRender);
-//        List<MovimientoDinero> movements = serviceMovement.getMovements();
-//        model.addAttribute("movements",movements);
 
-//        Long sumaMonto=serviceMovement.sumMounts();
-//        model.addAttribute("SumaMontos",sumaMonto);//Mandamos la suma de todos los montos a la plantilla
-//        return "movement"; //Llamamos al HTML
-//    }
-    @GetMapping("/Movements")
-    public String movement(Model model){
-        List<MovimientoDinero> movement = this.serviceMovement.getMovements();
-        model.addAttribute("movement",movement);
+    @GetMapping("/employeeNew")
+    public String newEployee(Model model){
+        model.addAttribute("employee", new Empleado());
+        model.addAttribute("Roles", Roles.values());
+        return "employeesCreate";
+    }
+    @PostMapping("/employeeAdd")
+    public RedirectView createEmployee(@ModelAttribute Empleado empleado, Model model){
+//        String passEncriptada=passwordEncoder().encode(empleado.getPassword());
+//        empleado.setPassword(passEncriptada);
+
+        model.addAttribute(empleado);
+        this.serviceEmployee.createEmpleado(empleado);
+        return new RedirectView("/usersEmployee");
+    }
+    @GetMapping("/employerUpdate/{employee_id}")
+    public String findByIdEmployee(@PathVariable int employee_id, Model model ) {
+        model.addAttribute("employee", serviceEmployee.findById(employee_id));
+        model.addAttribute("Roles", Roles.values());
+        return "/employeesUpdate";
+    }
+    @PutMapping("/employerUpdate/{employee_id}")
+    public RedirectView updateEmployee(@PathVariable int employee_id, @ModelAttribute("empleado") Empleado empleado, Model model ){
+
+        if ( serviceEmployee.findById( employee_id ) != null ){
+            serviceEmployee.updateEmployee(empleado);
+        }
+        return new RedirectView("/usersEmployee");
+    }
+
+
+
+    @GetMapping("/movementsView")
+    public String movementsView(Model model){
+        ArrayList<MovimientoDinero> mov = (ArrayList<MovimientoDinero>) serviceMovement.getAllMovements();
+        model.addAttribute("mov",mov);
+
+
+        Long sumaMonto=serviceMovement.sumMounts();
+        model.addAttribute("SumaMontos",sumaMonto);
         return "movement";
     }
-//    @GetMapping("/addMovements")
-//    public String nuevoMovimiento(Model model){
-//        MovimientoDinero movimiento= new MovimientoDinero();
-//        model.addAttribute("mov",movimiento);
-////      model.addAttribute("mensaje",mensaje);
-//        //Authentication auth= SecurityContextHolder.getContext().getAuthentication();
-//        //String correo=auth.getName();
+
+//
+
+    @GetMapping("/addMovements")
+    public String nuevoMovimiento(Model model){
+
+        model.addAttribute("mov",new MovimientoDinero());
+//      model.addAttribute("mensaje",mensaje);
+        //Authentication auth= SecurityContextHolder.getContext().getAuthentication();
+        //String correo=auth.getName();
 //        Integer idEmpleado=movimiento.getUsuario().getEmployee_id();
 //        model.addAttribute("idEmpleado",idEmpleado);
-//        return "saveMovement"; //Llamar HTML
-//    }
-//
-//    @PostMapping("/saveMovement")
-//    public String guardarMovimiento( MovimientoDinero mov,BindingResult result,Model model,RedirectAttributes flash,SessionStatus status){
-////        if(serviceMovement.saveOrUpdateMovimiento(mov)){
-////            redirectAttributes.addFlashAttribute("mensaje","saveOK");
-////            return "redirect:/VerMovimientos";
-////        }
-////        redirectAttributes.addFlashAttribute("mensaje","saveError");
-////        return "redirect:/AgregarMovimiento";
+        return "saveMovement";
+    }
+
+    @PostMapping("/saveMovements")
+    public RedirectView guardarMovimiento( @ModelAttribute MovimientoDinero mov,Model model){
+//        if(serviceMovement.saveOrUpdateMovimiento(mov)){
+//            redirectAttributes.addFlashAttribute("mensaje","saveOK");
+//            return "redirect:/movementsView";
+//        }
+//        redirectAttributes.addFlashAttribute("mensaje","saveError");
+//        return "redirect:/AgregarMovimiento";
 //        if(result.hasErrors()) {
 //            flash.addFlashAttribute("mensaje","saveOK");
 //            return "redirect:/addMovement";
 //        }
-//
-//        String mensaje = (mov.getId() != null) ? "El movimiento ha sido editado con exito" : "Movimiento creado con exito";
-//
-//        serviceMovement.saveOrUpdateMovimiento(mov);
+        model.addAttribute(mov);
+        serviceMovement.saveOrUpdateMovimiento(mov);
+        //String mensaje = (mov.getId() != null) ? "El movimiento ha sido editado con exito" : "Movimiento creado con exito";
+
+
 //        status.setComplete();
 //        flash.addFlashAttribute("success", mensaje);
-//        return "redirect:/movementsView";
-//    }
-//
-//    @GetMapping("/putMovement/{id}")
-//    public String editarMovimento(Model model, @PathVariable long id){
-//        MovimientoDinero mov=serviceMovement.getMovimientoById(id);
-//
-//        model.addAttribute("mov",mov);
-////        model.addAttribute("mensaje", mensaje);
+        return new RedirectView("/movementsView");
+    }
+
+    @GetMapping("/updateMovement/{id}")
+    public String editarMovimento(Model model, @PathVariable long id){
+        MovimientoDinero mov=serviceMovement.getMovimientoById(id);
+
+        model.addAttribute("mov",mov);
+//        model.addAttribute("mensaje", mensaje);
 //        List<Empleado> listaEmpleados= serviceEmployee.getEmployee();
 //        model.addAttribute("emplelist",listaEmpleados);
-//        return "updateMovements";
-//    }
-//
-//    @PostMapping("/updateMovement")
-//    public String updateMovimiento( RedirectAttributes redirectAttributes, MovimientoDinero mov,BindingResult result){
-//        if(!result.hasErrors()){
-//            redirectAttributes.addFlashAttribute("mensaje","Good");
-//            return "redirect:/movementsView";
-//        }
-//
+        return "/updateMovements";
+    }
+
+    @PutMapping("/updateMovement/{id}")
+    public RedirectView updateMovimiento(MovimientoDinero mov, @PathVariable long id, Model model){
+
+            //redirectAttributes.addFlashAttribute("mensaje","Good");
+            if ( serviceMovement.getMovimientoById( id ) != null ){
+                serviceMovement.saveOrUpdateMovimiento(mov);
+
+            }
+            return new RedirectView("/movementsView");
+
+
 //        redirectAttributes.addFlashAttribute("mensaje","ERROR");
-//        return "redirect:/putMovement/"+mov.getId();
-//
-//    }
-//
-//    @GetMapping("/deleteMovement/{id}")
-//    public String eliminarMovimiento(@PathVariable Long id, RedirectAttributes redirectAttributes){
-//        if (serviceMovement.deleteMovimiento(id)){
-//            redirectAttributes.addFlashAttribute("mensaje","GOOD");
-//            return "redirect:/movementsView";
+       //return "redirect:/putMovement/"+mov.getId();
+
+    }
+//    @PutMapping("/employerUpdate/{employee_id}")
+//    public RedirectView updateEmployee(@PathVariable int employee_id, @ModelAttribute("empleado") Empleado empleado, Model model ){
+//        if ( serviceEmployee.findById( employee_id ) != null ){
+//            serviceEmployee.updateEmployee(empleado);
 //        }
-//        redirectAttributes.addFlashAttribute("mensaje", "ERROR");
-//        return "redirect:/movementsView";
+//        return new RedirectView("/usersEmployee");
 //    }
+
+    @GetMapping("/deleteMovement/{id}")
+    public String eliminarMovimiento(@PathVariable Long id, RedirectAttributes redirectAttributes){
+        if (serviceMovement.deleteMovimiento(id)){
+            //redirectAttributes.addFlashAttribute("mensaje","GOOD");
+            return "redirect:/movementsView";
+        }
+        //redirectAttributes.addFlashAttribute("mensaje", "ERROR");
+        return "redirect:/movementsView";
+    }
 
 //    @GetMapping("/employee/{id}/movements") //Filtro de movimientos por empleados
 //    public String movimientosPorEmpleado(@PathVariable("id")Integer id, Model model){
@@ -203,7 +217,7 @@ public class FrontInitialController {
 //        model.addAttribute("SumaMontos",sumaMonto);
 //        return "movementsView"; //Llamamos al HTML
 //    }
-//
+
 
 }
 

@@ -103,35 +103,32 @@
                     <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card text-bg-light mb-3">
                         <h2 class="text-center pt-3">Editar Movimiento</h2>
                         <div class="card-body">
-                            <form th:action="@{/putMovement/}" th:object="${mov}" th:method="POST">
+                            <form th:action="@{/updateMovement/{id}(id=${mov.id})}" th:object="${mov}" th:method="PUT">
                                 <div class="form-group">
                                     <label>Concepto : </label>
 
                                     <div class="">
-                                        <select th:field="*{concept}" class="form-control" id="concepto" required="required">
-                                            <option th:value=1>Papeleria</option>
-                                            <option th:value=2>Servicios Publicos/Privados</option>
-                                            <option th:value=3>Operativos</option>
-                                            <option th:value=4>Caja menor</option>
-                                            <option th:value=5>Tributario</option>
-                                            <option th:value=6>Mobiliario</option>
-                                            <option th:value=7>Maquinaria y Equipo</option>
-                                            <option th:value=8>Nomina</option>
+                                        <select th:field="*{concept}" class="form-control" id="" required="required">
+                                            <option th:value=papelería>Papeleria</option>
+                                            <option th:value=Servicios>Servicios Publicos/Privados</option>
+                                            <option th:value=Operativos>Operativos</option>
+                                            <option th:value=Caja>Caja menor</option>
+                                            <option th:value=Tributario>Tributario</option>
+                                            <option th:value=Mobiliario>Mobiliario</option>
+                                            <option th:value=Maquinaria>Maquinaria y Equipo</option>
+                                            <option th:value=Nómina>Nomina</option>
 
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Monto : </label>
-                                    <input type="number" name="mount" th:field="*{mount}" class="form-control" required>
+                                    <input type="number" name="amount" th:field="*{amount}" class="form-control" required>
                                 </div>
+
                                 <div class="form-group">
                                     <label>Responsable : </label>
-                                    <input type="text" name="address" th:field="*{usuario}" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Fecha : </label>
-                                    <input type="date" name="fecha" th:field="*{updatedAt}" class="form-control" required readonly>
+                                    <input type="text" name="employee_id" th:field="*{usuario}" class="form-control"  required>
                                 </div>
                                 <div class="box-footer text-center pt-3">
                                     <button class="btn btn-success" type="submit">Guardar</button>

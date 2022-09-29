@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <title>Index</title>
+    <title>Create Employees</title>
     <style>
         nav {
             height: 100vh;
@@ -55,26 +55,26 @@
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
-                    <a href="/" class="nav-link active" aria-current="page">
+                <li>
+                    <a href="/" class="nav-link text-white">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg>
                         Home
                     </a>
                 </li>
                 <li>
-                    <a href="/movementsView" class="nav-link text-white">
+                    <a href="/Movements" class="nav-link text-white">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#cash_coin"/></svg>
                         Ingresos y egresos
                     </a>
                 </li>
                 <li>
-                    <a href="/usersEmployee" class="nav-link text-white">
+                    <a href="/usersEmployee" class="nav-link active">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
                         Usuarios
                     </a>
                 </li>
-                <li>
-                    <a href="/enterprises" class="nav-link text-white">
+                <li class="nav-item">
+                    <a href="/enterprises" class="nav-link text-white" aria-current="page">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#building"/></svg>
                         Empresas
                     </a>
@@ -94,29 +94,66 @@
             </div>
         </div>
     </nav>
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 align-self-center">
-        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-            <a href="/enterprises" class="nav-link feature col align-self-center border border-primary rounded pt-3 pb-3">
-                <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-                    <svg class="bi" width="1em" height="1em"><use xlink:href="#building"></use></svg>
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Empleado</h1>
+        </div>
+        <div class="container pt-5">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card text-bg-light mb-3">
+                    <h2 class="text-center pt-3">Nuevo Empleado</h2>
+                    <div class="card-body">
+                        <form th:action="@{/employeeAdd}" th:object="${employee}" th:method="POST">
+                            <div class="form-group">
+                                <label>Usuario : </label>
+                                <input type="text" name="users" th:field="*{users}" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Contraseña : </label>
+                                <input type="text" name="password" th:field="*{password}" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Nombre : </label>
+                                <input type="text" name="name" th:field="*{name}" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Documento : </label>
+                                <input type="text" name="document" th:field="*{document}" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email : </label>
+                                <input type="email" name="email" th:field="*{email}" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Telefono : </label>
+                                <input type="text" name="phone" th:field="*{phone}" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Empresa : </label>
+                                <input type="text" name="enterprise_id" th:field="*{enterprise}" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                 <label th:for="role">Rol : </label>
+                                 <select th:field="*{role}" class="form-select">
+                                     <option th:each="Roles : ${Roles}"
+                                             th:text="${Roles.name}"
+                                             th:value="${Roles}"></option>
+                                 </select>
+                             </div>
+                            <div class="box-footer d-flex justify-content-evenly pt-3 ">
+                                <button class="btn btn-success" type="submit">Guardar</button>
+                                <a href="/usersEmployee" class="btn btn-cancel btn-secondary"  >Cancelar</a>
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
-                <h3 class="fs-2">Sistema de gestión de empresas.</h3>
-            </a>
-            <a href="/usersEmployee" class="nav-link feature col align-self-center border border-primary rounded pt-3 pb-3">
-                <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-                    <svg class="bi" width="1em" height="1em"><use xlink:href="#people-circle"></use></svg>
-                </div>
-                <h3 class="fs-2">Sistema de gestión de usuarios.</h3>
-            </a>
-            <a href="/movementsView" class="nav-link feature col align-self-center border border-primary rounded pt-3 pb-3">
-                <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-                    <svg class="bi" width="1em" height="1em"><use xlink:href="#cash_coin"></use></svg>
-                </div>
-                <h3 class="fs-2">Sistema de gestión de ingresos y gastos.</h3>
-            </a>
+            </div>
         </div>
     </main>
 </div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </body>
 </html>

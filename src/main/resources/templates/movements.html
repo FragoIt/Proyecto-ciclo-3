@@ -62,7 +62,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/movementsView" class="nav-link active" aria-current="page">
+                        <a href="/Movements" class="nav-link active" aria-current="page">
                             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#cash_coin"/></svg>
                             Ingresos y egresos
                         </a>
@@ -118,18 +118,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="movements : ${movements}">
-                            <td th:text="${movements.id}"></td>
-                            <td th:text="${movements.amount}"></td>
-                            <td th:text="${movements.concept}"></td>
-                            <td th:text="${movements.createdAt}"></td>
+                        <tr th:each="mov : ${mov}">
+                            <td th:text="${mov.id}"></td>
+                            <td th:text="${mov.amount}"></td>
+                            <td th:text="${mov.concept}"></td>
+                            <td th:text="${mov.createdAt}"></td>
                             <td>
-                                <a class="btn btn-primary" th:href="@{/putMovement/{id}(id=${movements.id})}">
+                                <a class="btn btn-primary" th:href="@{/updateMovement/{id}(id=${mov.id})}">
                                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#edit"/></svg>
                                     Editar
                                 </a>
 
-                                <a class="btn btn-danger" th:href="@{/deleteMovement/{id}(id=${movements.id})}">
+                                <a class="btn btn-danger" th:href="@{/deleteMovement/{id}(id=${mov.id})}">
                                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#delec"/></svg>
                                     Eliminar
                                 </a>

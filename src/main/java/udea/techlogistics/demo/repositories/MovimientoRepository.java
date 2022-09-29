@@ -16,7 +16,7 @@ public interface MovimientoRepository extends JpaRepository<MovimientoDinero, Lo
 
     @Query(value="select * from movimientos where empleado_id in (select id from empleado where empresa_id= ?1)", nativeQuery = true)
     public abstract ArrayList<MovimientoDinero> findByEmpresa(Integer id);
-    @Query(value="SELECT SUM(monto) from movimientos", nativeQuery = true)
+    @Query(value="SELECT SUM(amount) from movements", nativeQuery = true)
     public abstract Long SumarMonto();
 
 
@@ -27,6 +27,8 @@ public interface MovimientoRepository extends JpaRepository<MovimientoDinero, Lo
     @Query(value="select sum(monto) from movimientos where empleado_id in (select id from empleado where empresa_id= ?1)", nativeQuery = true)
     public abstract Long mountXEnterprise(Integer id);
 
-    public Page<MovimientoDinero> findAll(Pageable pageable);
+//    public Page<MovimientoDinero> findAll(Pageable pageable);
+    @Query(value="select employee_id from employee where email=?1", nativeQuery = true)
+    public abstract Integer idXEmail(String correo);
 
 }
