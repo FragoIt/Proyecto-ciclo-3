@@ -128,33 +128,16 @@ public class FrontInitialController {
     public String nuevoMovimiento(Model model){
 
         model.addAttribute("mov",new MovimientoDinero());
-//      model.addAttribute("mensaje",mensaje);
-        //Authentication auth= SecurityContextHolder.getContext().getAuthentication();
-        //String correo=auth.getName();
-//        Integer idEmpleado=movimiento.getUsuario().getEmployee_id();
-//        model.addAttribute("idEmpleado",idEmpleado);
+
         return "saveMovement";
     }
 
     @PostMapping("/saveMovements")
     public RedirectView guardarMovimiento( @ModelAttribute MovimientoDinero mov,Model model){
-//        if(serviceMovement.saveOrUpdateMovimiento(mov)){
-//            redirectAttributes.addFlashAttribute("mensaje","saveOK");
-//            return "redirect:/movementsView";
-//        }
-//        redirectAttributes.addFlashAttribute("mensaje","saveError");
-//        return "redirect:/AgregarMovimiento";
-//        if(result.hasErrors()) {
-//            flash.addFlashAttribute("mensaje","saveOK");
-//            return "redirect:/addMovement";
-//        }
+//
         model.addAttribute(mov);
         serviceMovement.saveOrUpdateMovimiento(mov);
-        //String mensaje = (mov.getId() != null) ? "El movimiento ha sido editado con exito" : "Movimiento creado con exito";
 
-
-//        status.setComplete();
-//        flash.addFlashAttribute("success", mensaje);
         return new RedirectView("/movementsView");
     }
 
@@ -163,9 +146,7 @@ public class FrontInitialController {
         MovimientoDinero mov=serviceMovement.getMovimientoById(id);
 
         model.addAttribute("mov",mov);
-//        model.addAttribute("mensaje", mensaje);
-//        List<Empleado> listaEmpleados= serviceEmployee.getEmployee();
-//        model.addAttribute("emplelist",listaEmpleados);
+
         return "/updateMovements";
     }
 
@@ -180,17 +161,9 @@ public class FrontInitialController {
             return new RedirectView("/movementsView");
 
 
-//        redirectAttributes.addFlashAttribute("mensaje","ERROR");
-       //return "redirect:/putMovement/"+mov.getId();
 
     }
-//    @PutMapping("/employerUpdate/{employee_id}")
-//    public RedirectView updateEmployee(@PathVariable int employee_id, @ModelAttribute("empleado") Empleado empleado, Model model ){
-//        if ( serviceEmployee.findById( employee_id ) != null ){
-//            serviceEmployee.updateEmployee(empleado);
-//        }
-//        return new RedirectView("/usersEmployee");
-//    }
+
 
     @GetMapping("/deleteMovement/{id}")
     public String eliminarMovimiento(@PathVariable Long id, RedirectAttributes redirectAttributes){
