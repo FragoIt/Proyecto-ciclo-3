@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <title>Update Enterprise</title>
+    <title>Create Enterprise</title>
     <style>
         nav {
             height: 100vh;
@@ -22,33 +22,38 @@
         <header th:insert="layouts/layout-main :: navbar"></header>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Empresas</h1>
+                <h1 class="h2">Movimiento de dinero</h1>
             </div>
             <div class="container pt-5">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card text-bg-light mb-3">
-                        <h2 class="text-center pt-3">Editar Empresa</h2>
+                        <h2 class="text-center pt-3">Nuevo Movimiento</h2>
                         <div class="card-body">
-                            <form th:action="@{/enterprisesPut/{enterprise_id}(enterprise_id=${enterprise.enterprise_id})}" th:object="${enterprise}" th:method="PUT">
+                            <form th:action="@{/saveMovements/}" th:object="${mov}" th:method="POST">
+
                                 <div class="form-group">
-                                    <labe>Nombre : </labe>
-                                    <input type="text" name="name" th:field="*{name}" class="form-control" required>
+                                    <label>Monto : </label>
+                                    <input type="number" name="amount" th:field="*{amount}" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <labe>Nit : </labe>
-                                    <input type="text" name="nit" th:field="*{nit}" class="form-control" required>
+                                    <label>Responsable : </label>
+                                    <input type="text" name="employee_id" th:field="*{usuario}" class="form-control"  required>
                                 </div>
                                 <div class="form-group">
-                                    <labe>Dirección : </labe>
-                                    <input type="text" name="address" th:field="*{address}" class="form-control" required>
+                                    <label>Concepto : </label>
+                                    <select th:field="*{concept}" class="form-control" id="" required="required">
+                                        <option th:value=papelería>Papeleria</option>
+                                        <option th:value=Servicios>Servicios Publicos/Privados</option>
+                                        <option th:value=Operativos>Operativos</option>
+                                        <option th:value=Caja>Caja menor</option>
+                                        <option th:value=Tributario>Tributario</option>
+                                        <option th:value=Mobiliario>Mobiliario</option>
+                                        <option th:value=Maquinaria>Maquinaria y Equipo</option>
+                                        <option th:value=Nómina>Nomina</option>
+                                    </select>
                                 </div>
-                                <div class="form-group">
-                                    <labe>Telefono : </labe>
-                                    <input type="number" name="phone" th:field="*{phone}" class="form-control" required>
-                                </div>
-                                <div class="box-footer d-flex justify-content-evenly pt-3 ">
+                                <div class="box-footer text-center pt-3">
                                     <button class="btn btn-success" type="submit">Guardar</button>
-                                    <a href="/enterprises" class="btn btn-cancel btn-secondary">Cancelar</a>
                                 </div>
                             </form>
                         </div>

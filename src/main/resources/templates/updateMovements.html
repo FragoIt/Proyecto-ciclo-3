@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <title>Update Enterprise</title>
+    <style>
+        nav {
+            height: 100vh;
+        }
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex">
+        <header th:insert="layouts/layout-main :: navbar"></header>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Empresas</h1>
+            </div>
+            <div class="container pt-5">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card text-bg-light mb-3">
+                        <h2 class="text-center pt-3">Editar Movimiento</h2>
+                        <div class="card-body">
+                            <form th:action="@{/updateMovement/{id}(id=${mov.id})}" th:object="${mov}" th:method="PUT">
+                                <div class="form-group">
+                                    <label>Concepto : </label>
+                                    <div class="">
+                                        <select th:field="*{concept}" class="form-control" id="" required="required">
+                                            <option th:value=papelería>Papeleria</option>
+                                            <option th:value=Servicios>Servicios Publicos/Privados</option>
+                                            <option th:value=Operativos>Operativos</option>
+                                            <option th:value=Caja>Caja menor</option>
+                                            <option th:value=Tributario>Tributario</option>
+                                            <option th:value=Mobiliario>Mobiliario</option>
+                                            <option th:value=Maquinaria>Maquinaria y Equipo</option>
+                                            <option th:value=Nómina>Nomina</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Monto : </label>
+                                    <input type="number" name="amount" th:field="*{amount}" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Responsable : </label>
+                                    <input type="text" name="employee_id" th:field="*{usuario}" class="form-control"  required>
+                                </div>
+                                <div class="box-footer text-center pt-3">
+                                    <button class="btn btn-success" type="submit">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+</body>
+</html>

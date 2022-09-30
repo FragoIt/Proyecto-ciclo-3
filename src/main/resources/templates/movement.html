@@ -30,29 +30,33 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end align-items-center pt-3 pb-2 mb-3">
-                <a href="/enterprisesNew" class="btn btn-success">Agregar Nuevo Movimiento</a>
+                <a href="/addMovements" class="btn btn-success">Agregar Nuevo Movimiento</a>
             </div>
             <div class="table-responsive">
-                <table class="table">
+                <table class="table table-bordered">
                     <thead class="table-dark">
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Monto</th>
                             <th scope="col">Concepto</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Responsable</th>
                             <th scope="col" class="text-align-center">Acción</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="movement : ${movements}">
+                        <tr th:each="movement : ${mov}">
                             <td th:text="${movement.id}"></td>
                             <td th:text="${movement.amount}"></td>
                             <td th:text="${movement.concept}"></td>
+                            <td th:text="${movement.updatedAt}"></td>
+                            <td th:text="${movement.usuario.name}"></td>
                             <td>
-                                <a class="btn btn-primary">
+                                <a class="btn btn-primary" th:href ="@{/updateMovement/{id}(id=${movement.id})}">
                                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#edit"/></svg>
                                     Editar
                                 </a>
-                                <a class="btn btn-danger">
+                                <a class="btn btn-danger" th:href="@{/deleteMovement/{id}(id=${movement.id})}">
                                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#delec"/></svg>
                                     Eliminar
                                 </a>
@@ -60,6 +64,14 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-3" for="SumaMontos">Total Movimientos:</label>
+                        <div class="col-md-6">
+                            <p th:text="${#numbers.formatCurrency(SumaMontos)}" class="form-control" id="SumaMontos"></p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
     </div>

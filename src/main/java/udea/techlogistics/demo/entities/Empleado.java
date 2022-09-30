@@ -2,7 +2,6 @@ package udea.techlogistics.demo.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-
 @Entity
 @Table(name="employee")
 public class Empleado {
@@ -14,7 +13,7 @@ public class Empleado {
     @Column(nullable = false)
     private String password;
 
-    private String image = "dsahdgsahdgas";
+    private String image = "img-pru";
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
@@ -24,8 +23,6 @@ public class Empleado {
     @Column(nullable = false)
     private String phone;
 
-
-    //hotfix de enum
     @Enumerated(EnumType.STRING)
     @Column(name = "role",nullable = false)
     private Roles role;
@@ -41,17 +38,18 @@ public class Empleado {
 
     public Empleado() {
     }
-    public Empleado(String users, String password, String name, String document, String email, String phone, Roles role, Empresa enterprise) {
+    public Empleado(String users, String password, String name, String document, String email, String phone, Roles role, Empresa enterprise, String image) {
         this.users = users;
         this.password = password;
         this.name = name;
         this.document = document;
         this.email = email;
         this.phone = phone;
-        this.role = role;
+        this.role= role;
         this.enterprise = enterprise;
         this.setCreatedAt(createdAt);
         this.setUpdatedAt(updatedAt);
+        this.image= image;
     }
 
     public int getEmployee_id() {
