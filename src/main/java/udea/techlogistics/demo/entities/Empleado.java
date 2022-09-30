@@ -14,7 +14,7 @@ public class Empleado {
     @Column(nullable = false)
     private String password;
 
-    private String image;
+    private String image = "dsahdgsahdgas";
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)

@@ -25,6 +25,11 @@ public class FrontInitialController {
     @Autowired
     private MovimientoServices serviceMovement;
 
+    @RequestMapping("/login")
+    public String login(Model model) {
+        return "login";
+    }
+
     //Inicio
     @GetMapping("/")
     public String index(){
