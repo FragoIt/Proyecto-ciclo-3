@@ -61,7 +61,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/Movements" class="nav-link text-white">
+                    <a href="/movementsView" class="nav-link text-white">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#cash_coin"/></svg>
                         Ingresos y egresos
                     </a>
@@ -83,7 +83,7 @@
             <div class="dropdown">
                 <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="images/user.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                    <strong>mdo</strong>
+                    <strong>[[${#httpServletRequest.remoteUser}]]</strong>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                     <li><a class="dropdown-item" href="#">Perfil</a></li>
